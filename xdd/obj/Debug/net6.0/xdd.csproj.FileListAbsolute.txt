@@ -1,0 +1,15 @@
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/bin/Debug/net6.0/xdd
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/bin/Debug/net6.0/xdd.deps.json
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/bin/Debug/net6.0/xdd.runtimeconfig.json
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/bin/Debug/net6.0/xdd.dll
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/bin/Debug/net6.0/ref/xdd.dll
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/bin/Debug/net6.0/xdd.pdb
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/obj/Debug/net6.0/xdd.csproj.AssemblyReference.cache
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/obj/Debug/net6.0/xdd.GeneratedMSBuildEditorConfig.editorconfig
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/obj/Debug/net6.0/xdd.AssemblyInfoInputs.cache
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/obj/Debug/net6.0/xdd.AssemblyInfo.cs
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/obj/Debug/net6.0/xdd.csproj.CoreCompileInputs.cache
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/obj/Debug/net6.0/xdd.dll
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/obj/Debug/net6.0/ref/xdd.dll
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/obj/Debug/net6.0/xdd.pdb
+/Users/leonj/Desktop/Code/CSProjects/ServerPM/xdd/obj/Debug/net6.0/xdd.genruntimeconfig.cache
