@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Text;
 
 class Program {
@@ -8,17 +8,9 @@ class Program {
     }
     
     static void send_package(string package, HttpListenerResponse response, System.IO.Stream output){
-        if(Directory.Exists(package)){
-            Console.WriteLine("ha");
-        }
-        string[] files = 
-            Directory.GetFiles(package);
-        Console.WriteLine(files);
-
         if(File.Exists(package + ".txt")){
             byte[] file = File.ReadAllBytes(package + ".txt");
             output.Write(file);
-
         }
         
     }
@@ -30,7 +22,6 @@ class Program {
         HttpListenerRequest request = context.Request;
         HttpListenerResponse response = context.Response;
         System.IO.Stream output = response.OutputStream;
-        response.AddHeader("info", "haha");
 
         string package = "";
         string message = "";
@@ -44,9 +35,9 @@ class Program {
             if(package == "" && package == " "){ // If the client somehow sent no name or blank space as the package name
                 Console.WriteLine("No package declared");
                 message += "No package Declared\n";
-            //} else if(!File.Exists(package + ".txt")){// If the client sent a package name but it doesn't exist
-            //    Console.WriteLine("Package " + package + "  does not exist!");
-            //    message += "Package " + package + " Does not exist!";
+            } else if(!File.Exists(package + ".txt")){// If the client sent a package name but it doesn't exist
+                Console.WriteLine("Package " + package + "  does not exist!");
+                message += "Package " + package + " Does not exist!";
             }else{
                 if(request.HttpMethod == "GET"){ // If the client is requesting something (thereby GET)
                 message += "Get fked\n";
@@ -67,6 +58,7 @@ class Program {
 
         send_string(response, message, output);
         Console.WriteLine("Text sent : " + message);
+
         output.Close();
     }
     public static void Main() {
@@ -75,11 +67,11 @@ class Program {
         listener.Prefixes.Add("http://*:8001/");
 
         listener.Start();
-        while(true){
-            Console.WriteLine("\n\nListening... ");
-            listen(listener);
-        }
-        //listener.Close();
+        
+        Console.WriteLine("\n\nListening... ");
+        listen(listener);
+
+        listener.Close();
         
     }
 
