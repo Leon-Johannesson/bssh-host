@@ -1,16 +1,19 @@
 ﻿using System.Net;
-using System.Text;
+using BC = BCrypt.Net.BCrypt;
 
 class Program {
-        static HttpListenerContext context;
-        static HttpListenerRequest request;
-        static HttpListenerResponse response;
-        static System.IO.Stream output;
+    static HttpListenerContext context;
+    static HttpListenerRequest request;
+    static HttpListenerResponse response;
+    static System.IO.Stream output;
     static void send_string(string responseString){
         byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
         output.Write(buffer);
     }
     static void send_package(string package){
+        // Pretty simple sends a package by taking all the bytes of the package
+        // sending the bytes with a instruction on how to divide them correctly
+
         byte[] file = File.ReadAllBytes("packages/" + package + ".bin");
         string json = File.ReadAllText("packages/" + package + ".json");
         
@@ -20,6 +23,8 @@ class Program {
         Console.WriteLine("Sent package " + package);
     }
     static void post_package(string package){
+        // wip  Will allow users to post their own packages
+
         Stream data = request.InputStream;
 
         Console.WriteLine("Package created : " + package);
@@ -35,10 +40,12 @@ class Program {
 
         Console.WriteLine("Posted package " + package);
     }
-    static void update_package(){
-
-    }
     static string get_pkg(string package){
+        // This does some of the raw checking to see that nothing is wrong with the 
+        // Package that the user is requesting (for example the user doing something like ..
+        // Which would allow them to download random files on the server)
+        // Or somehow sending blankspaces or just simply a package that doesnt exist
+
 
         Console.WriteLine(request.Headers["type"]);
         Console.WriteLine("Package name : " + package);
@@ -63,16 +70,37 @@ class Program {
         return "";
     }
     static void closeOutput(string message){
+        // One of the last things is sending a message with everything that happened and
+        // Then closing streams as to not make any lingering connections
+
         send_string(message);
         Console.WriteLine("\nText sent : " + message);
         output.Close();
     }
+    static bool pass(){
+        string? pass = request.Headers["pass"];
+
+        if(string.IsNullOrWhiteSpace(pass)){
+            return false;
+        }
+        string[] lines = File.ReadAllLines("password.txt");  
+        foreach (string line in lines){ 
+            if(BC.Verify(pass, line)){
+                return true;
+            }
+        }
+        return false;
+    }
     static void listen(HttpListener listener){
+        // Sets up the program to whatever user is requesting a function
+        // Figures out what the user wants and sends them on their way :)
+
         context = listener.GetContext();
         request = context.Request;
         response = context.Response;
         output = response.OutputStream;
-
+        
+        if(!pass()){ return;}
 
         string? package = request.Headers["name"]; 
         if(package == null){
@@ -108,5 +136,4 @@ class Program {
         //listener.Close();
         
     }
-
 } // bssh get-pkg name
